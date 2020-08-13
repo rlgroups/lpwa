@@ -113,8 +113,12 @@ class LaravelMPWAServiceProvider extends ServiceProvider
      */
     public function registerDirective()
     {
-        Blade::directive('laravelPWA', function () {
-            return (new \LaravelMPWA\Services\MetaService)->render();
+        Blade::directive('laravelPWA', function ($params = '') {
+            $ext = array_map(function ($p) {
+                return trim($p, "'");
+            }, explode(',', $params));
+
+            return (new \LaravelMPWA\Services\MetaService)->render($ext[0] ?? '');
         });
     }
 

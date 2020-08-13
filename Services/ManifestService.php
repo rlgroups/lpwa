@@ -7,7 +7,17 @@ class ManifestService
 {
     public function generate($name = '')
     {
-        $config = array_merge(config('laravelmultipwa'), config("laravelmultipwa.extra.{$name}"));
+        $baseConfig = config('laravelmultipwa');
+        $extraConfig = config("laravelmultipwa.extra.{$name}") ?? [];
+
+        $config = collect($baseConfig)->map(function ($value, $key) use ($extraConfig) {
+            if (\is_array($value)) {
+                return array_merge($value, $extraConfig[$key] ?? []);
+            } else {
+                return $value ?? ($extraConfig[$key] ?? null);
+            }
+        })->toArray();
+
 
         $basicManifest =  $config['manifest'];
 
