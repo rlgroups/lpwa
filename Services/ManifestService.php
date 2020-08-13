@@ -33,15 +33,16 @@ class ManifestService
         //     'splash' =>  config('laravelmultipwa.manifest.splash')
         // ];
 
-        foreach ($config['manifest']['icons'] as $size => $file) {
+        $basicManifest['icons'] = collect($config['manifest']['icons'])->map(function ($file, $size) {
             $fileInfo = pathinfo($file['path']);
-            $basicManifest['icons'][] = [
+
+            return [
                 'src' => $file['path'],
                 'type' => 'image/' . $fileInfo['extension'],
                 'sizes' => $size,
                 'purpose' => $file['purpose']
             ];
-        }
+        })->values()->toArray();
 
         foreach ($config['manifest']['shortcuts'] as $shortcut) {
 
