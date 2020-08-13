@@ -1,0 +1,30 @@
+{
+    "name": "rlgroups/laravelmultipwa",
+    "description": "Looks like an app, feels like an app, but NOT an app.",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "php",
+        "pwa",
+        "progressive web apps"
+    ],
+    "authors": [
+        {
+            "name": "Yehuda Fahima",
+            "email": "yehudafh@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "LaravelMPWA\\": ""
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelMPWA\\Providers\\LaravelMPWAServiceProvider"
+            ]
+        }
+    }
+}
